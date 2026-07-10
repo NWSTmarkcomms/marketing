@@ -108,7 +108,25 @@
 
       </div>
 
-      <div class="gallery-grid">
+<section
+  id="catalog"
+  class="catalog-section"
+  aria-labelledby="catalog-heading"
+>
+  <div class="section-heading catalog-heading">
+    <span class="section-label">Approved Materials</span>
+
+    <h2 id="catalog-heading">
+      Marketing Material Catalog
+    </h2>
+
+    <p>
+      Select any approved material to view a larger preview.
+    </p>
+  </div>
+
+  <div id="catalog-grid" class="gallery-grid"></div>
+</section>
 
         <article
           class="social-card searchable-card"
@@ -224,63 +242,421 @@
 
   </div>
 
-  <script>
-    const searchInput = document.getElementById("portal-search");
-    const searchableCards = document.querySelectorAll(".searchable-card");
-    const noResultsMessage = document.getElementById(
-      "no-results-message"
-    );
+<script>
+  const catalogMaterials = [
+    {
+      file: "all-services (2).png",
+      title: "All Services Leave Behind"
+    },
+    {
+      file: "all-services.png",
+      title: "All Services"
+    },
+    {
+      file: "attic.png",
+      title: "Attic Services"
+    },
+    {
+      file: "bird (2).png",
+      title: "Bird Control Leave Behind"
+    },
+    {
+      file: "bird.png",
+      title: "Bird Control"
+    },
+    {
+      file: "comm.png",
+      title: "Commercial Services"
+    },
+    {
+      file: "coozie.png",
+      title: "Coozie"
+    },
+    {
+      file: "crawl.png",
+      title: "Crawlspace Services"
+    },
+    {
+      file: "green.png",
+      title: "Green Services"
+    },
+    {
+      file: "hr-flyer.png",
+      title: "Recruiting Flyer"
+    },
+    {
+      file: "hr-irecruit-card.png",
+      title: "iRecruit Card"
+    },
+    {
+      file: "in2care.png",
+      title: "In2Care Mosquito Control"
+    },
+    {
+      file: "local-business-takeover.png",
+      title: "Local Business Takeover"
+    },
+    {
+      file: "mosquito.png",
+      title: "Mosquito Control"
+    },
+    {
+      file: "new-con-brochure.png",
+      title: "New Construction Brochure"
+    },
+    {
+      file: "new-con-office.png",
+      title: "New Construction Office Material"
+    },
+    {
+      file: "new-con.png",
+      title: "New Construction"
+    },
+    {
+      file: "no-contact.png",
+      title: "No Contact Material"
+    },
+    {
+      file: "pen (2).png",
+      title: "Promotional Pen Option 2"
+    },
+    {
+      file: "pen.png",
+      title: "Promotional Pen"
+    },
+    {
+      file: "post-it.png",
+      title: "Promotional Post-it Notes"
+    },
+    {
+      file: "request-dh.png",
+      title: "Door Hanger Request"
+    },
+    {
+      file: "sentricon (2).png",
+      title: "Sentricon Leave Behind"
+    },
+    {
+      file: "sentricon.png",
+      title: "Sentricon"
+    },
+    {
+      file: "service-stan.png",
+      title: "Service Standards"
+    },
+    {
+      file: "spec.png",
+      title: "Specialty Services"
+    },
+    {
+      file: "spider.png",
+      title: "Spider Control"
+    },
+    {
+      file: "standard-posters (2).png",
+      title: "Standard Posters Option 2"
+    },
+    {
+      file: "standard-posters.png",
+      title: "Standard Posters"
+    },
+    {
+      file: "tattoo.png",
+      title: "Temporary Tattoo"
+    },
+    {
+      file: "thank-you.png",
+      title: "Thank You Material"
+    },
+    {
+      file: "wildlife.png",
+      title: "Wildlife Services"
+    }
+  ];
 
-    searchInput.addEventListener("input", function () {
-      const searchTerm = this.value.toLowerCase().trim();
-      let visibleCards = 0;
+  const catalogGrid = document.getElementById("catalog-grid");
 
-      searchableCards.forEach(function (card) {
-        const searchableText = (
-          card.dataset.search + " " + card.textContent
-        ).toLowerCase();
+  catalogMaterials.forEach(function (material) {
+    const imagePath =
+      "images/catalog-images/" +
+      encodeURIComponent(material.file);
 
-        const matchesSearch = searchableText.includes(searchTerm);
+    const card = document.createElement("article");
 
-        card.hidden = !matchesSearch;
+    card.className = "material-card";
 
-        if (matchesSearch) {
-          visibleCards++;
-        }
+    card.innerHTML = `
+      <button
+        class="material-image-button"
+        type="button"
+        aria-label="Preview ${material.title}"
+      >
+        <img
+          src="${imagePath}"
+          alt="${material.title}"
+          loading="lazy"
+        >
+      </button>
+
+      <div class="material-card-content">
+        <h3 class="material-title">
+          ${material.title}
+        </h3>
+      </div>
+    `;
+
+    card
+      .querySelector(".material-image-button")
+      .addEventListener("click", function () {
+        openImageModal(imagePath, material.title);
       });
 
-      noResultsMessage.hidden = visibleCards !== 0;
-    });
+    catalogGrid.appendChild(card);
+  });
 
-    function openImageModal(imageSource, imageTitle) {
-      const modal = document.getElementById("image-modal");
-      const modalImage = document.getElementById("modal-image");
-      const modalTitle = document.getElementById("modal-title");
+  function openImageModal(imageSource, imageTitle) {
+    const modal = document.getElementById("image-modal");
+    const modalImage = document.getElementById("modal-image");
+    const modalTitle = document.getElementById("modal-title");
 
-      modalImage.src = imageSource;
-      modalImage.alt = imageTitle;
-      modalTitle.textContent = imageTitle;
+    modalImage.src = imageSource;
+    modalImage.alt = imageTitle;
+    modalTitle.textContent = imageTitle;
 
-      modal.hidden = false;
-      document.body.classList.add("modal-open");
+    modal.hidden = false;
+    document.body.classList.add("modal-open");
+  }
+
+  function closeImageModal() {
+    const modal = document.getElementById("image-modal");
+    const modalImage = document.getElementById("modal-image");
+
+    modal.hidden = true;
+    modalImage.src = "";
+
+    document.body.classList.remove("modal-open");
+  }
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+      closeImageModal();
     }
-
-    function closeImageModal() {
-      const modal = document.getElementById("image-modal");
-      const modalImage = document.getElementById("modal-image");
-
-      modal.hidden = true;
-      modalImage.src = "";
-
-      document.body.classList.remove("modal-open");
-    }
-
-    document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape") {
-        closeImageModal();
-      }
-    });
-  </script>
+  });
+</script>
 
 </body>
+
+<script>
+  const catalogMaterials = [
+    {
+      file: "all-services (2).png",
+      title: "All Services",
+      category: "Leave Behind"
+    },
+    {
+      file: "all-services.png",
+      title: "All Services",
+      category: "Approved Material"
+    },
+    {
+      file: "attic.png",
+      title: "Attic Services",
+      category: "Approved Material"
+    },
+    {
+      file: "bird (2).png",
+      title: "Bird Control",
+      category: "Leave Behind"
+    },
+    {
+      file: "bird.png",
+      title: "Bird Control",
+      category: "Approved Material"
+    },
+    {
+      file: "comm.png",
+      title: "Commercial Services",
+      category: "Approved Material"
+    },
+    {
+      file: "coozie.png",
+      title: "Coozie",
+      category: "Promotional Item"
+    },
+    {
+      file: "crawl.png",
+      title: "Crawlspace Services",
+      category: "Approved Material"
+    },
+    {
+      file: "green.png",
+      title: "Green Services",
+      category: "Approved Material"
+    },
+    {
+      file: "hr-flyer.png",
+      title: "Recruiting Flyer",
+      category: "Recruiting"
+    },
+    {
+      file: "hr-irecruit-card.png",
+      title: "iRecruit Card",
+      category: "Recruiting"
+    },
+    {
+      file: "in2care.png",
+      title: "In2Care Mosquito Control",
+      category: "Approved Material"
+    },
+    {
+      file: "local-business-takeover.png",
+      title: "Local Business Takeover",
+      category: "Event Material"
+    },
+    {
+      file: "mosquito.png",
+      title: "Mosquito Control",
+      category: "Approved Material"
+    },
+    {
+      file: "new-con-brochure.png",
+      title: "New Construction Brochure",
+      category: "Brochure"
+    },
+    {
+      file: "new-con-office.png",
+      title: "New Construction Office Material",
+      category: "Approved Material"
+    },
+    {
+      file: "new-con.png",
+      title: "New Construction",
+      category: "Approved Material"
+    },
+    {
+      file: "no-contact.png",
+      title: "No Contact Material",
+      category: "Customer Communication"
+    },
+    {
+      file: "pen (2).png",
+      title: "Promotional Pen",
+      category: "Promotional Item"
+    },
+    {
+      file: "pen.png",
+      title: "Promotional Pen",
+      category: "Promotional Item"
+    },
+    {
+      file: "post-it.png",
+      title: "Promotional Post-it Notes",
+      category: "Promotional Item"
+    },
+    {
+      file: "request-dh.png",
+      title: "Request a Door Hanger",
+      category: "Door Hanger"
+    },
+    {
+      file: "sentricon (2).png",
+      title: "Sentricon",
+      category: "Leave Behind"
+    },
+    {
+      file: "sentricon.png",
+      title: "Sentricon",
+      category: "Approved Material"
+    },
+    {
+      file: "service-stan.png",
+      title: "Service Standards",
+      category: "Internal Material"
+    },
+    {
+      file: "spec.png",
+      title: "Specialty Services",
+      category: "Approved Material"
+    },
+    {
+      file: "spider.png",
+      title: "Spider Control",
+      category: "Approved Material"
+    },
+    {
+      file: "standard-posters (2).png",
+      title: "Standard Posters",
+      category: "Poster"
+    },
+    {
+      file: "standard-posters.png",
+      title: "Standard Posters",
+      category: "Poster"
+    },
+    {
+      file: "tattoo.png",
+      title: "Temporary Tattoo",
+      category: "Promotional Item"
+    },
+    {
+      file: "thank-you.png",
+      title: "Thank You Material",
+      category: "Customer Communication"
+    },
+    {
+      file: "wildlife.png",
+      title: "Wildlife Services",
+      category: "Approved Material"
+    }
+  ];
+
+  const catalogGrid = document.getElementById("catalog-grid");
+
+  catalogMaterials.forEach(function (material) {
+    const imagePath =
+      "images/catalog-images/" +
+      encodeURIComponent(material.file).replace(/%2F/g, "/");
+
+    const card = document.createElement("article");
+
+    card.className = "social-card searchable-card";
+
+    card.dataset.search = [
+      material.title,
+      material.category,
+      material.file
+    ].join(" ").toLowerCase();
+
+    card.innerHTML = `
+      <button
+        class="image-button"
+        type="button"
+        aria-label="Preview ${material.title}"
+      >
+        <img
+          src="${imagePath}"
+          alt="Preview of ${material.title}"
+          loading="lazy"
+        >
+      </button>
+
+      <div class="card-content">
+        <span class="badge">
+          ${material.category}
+        </span>
+
+        <h3 class="product-title">
+          ${material.title}
+        </h3>
+      </div>
+    `;
+
+    const previewButton = card.querySelector(".image-button");
+
+    previewButton.addEventListener("click", function () {
+      openImageModal(imagePath, material.title);
+    });
+
+    catalogGrid.appendChild(card);
+  });
 </html>
