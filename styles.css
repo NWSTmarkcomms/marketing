@@ -421,3 +421,25 @@ input {
         padding: 18px;
     }
 }
+
+.approved-materials-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    padding: 12px 20px;
+    border-radius: 999px;
+    background: var(--northwest-green);
+    color: var(--northwest-black);
+    text-decoration: none;
+    font-weight: 750;
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.approved-materials-link:hover,
+.approved-materials-link:focus-visible {
+    background: #76b338;
+    transform: translateY(-2px);
+}
