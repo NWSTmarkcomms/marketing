@@ -480,3 +480,15 @@ input {
 .catalog-notice a:focus-visible {
     color: #48751d;
 }
+
+.marketing-email {
+    color: #5f9228;
+    font-weight: 700;
+    text-decoration: underline;
+    overflow-wrap: anywhere;
+}
+
+.marketing-email:hover,
+.marketing-email:focus-visible {
+    color: #48751d;
+}
