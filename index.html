@@ -1,1 +1,308 @@
-<header class="site-header">2  <img3    src="/images/NW FOB.png    alt="Northwest Logo"5    class="brand-logo"6  >7 8  <h1>Marketing Materials h"9    type="search"10    placeholder="Search materials..."11  >12 13  <nav class="nav-bar">14    <a href="catalog.html">Catalog</a>15    #Events</a>16    #17    <a href>18  </nav>19</header>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Northwest Family of Brands Marketing Material Portal</title>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <header class="site-header">
+
+    <a href="index.html" class="brand-link">
+      <img
+        src="images/NW-FOB.png"
+        alt="Northwest Family of Brands"
+        class="brand-logo"
+      >
+    </a>
+
+    <h1>Marketing Material Portal</h1>
+
+    <p class="header-description">
+      Browse, preview, and request approved marketing materials.
+    </p>
+
+    <label for="portal-search" class="visually-hidden">
+      Search marketing materials
+    </label>
+
+    <input
+      id="portal-search"
+      class="portal-search"
+      type="search"
+      placeholder="Search marketing materials..."
+      autocomplete="off"
+    >
+
+    <nav class="nav-bar" aria-label="Main navigation">
+      <a href="#catalog">Catalog</a>
+      <a href="#request-materials">Request Materials</a>
+      <a href="#events">Events</a>
+    </nav>
+
+  </header>
+
+  <main>
+
+    <section
+      id="request-materials"
+      class="request-section"
+      aria-labelledby="request-heading"
+    >
+
+      <div class="request-card">
+
+        <div class="section-heading">
+          <span class="section-label">Marketing Support</span>
+
+          <h2 id="request-heading">
+            Request Marketing Materials
+          </h2>
+
+          <p>
+            Submit the form below to request materials for your local
+            office, event, campaign, or customer outreach.
+          </p>
+        </div>
+
+        <iframe
+          src="https://app.smartsheet.com/b/form/019d2c48124176e9952f969db8cadbf4"
+          class="request-form"
+          title="Marketing materials request form"
+          loading="lazy">
+        </iframe>
+
+      </div>
+
+    </section>
+
+    <section
+      id="catalog"
+      class="catalog-section"
+      aria-labelledby="catalog-heading"
+    >
+
+      <div class="section-heading catalog-heading">
+        <span class="section-label">Approved Materials</span>
+        <h2 id="catalog-heading">Marketing Material Catalog</h2>
+
+        <p>
+          Select a material to preview the full-size image.
+        </p>
+      </div>
+
+      <div class="gallery-grid">
+
+        <article
+          class="social-card searchable-card"
+          data-search="all services leave behind print services brochure"
+        >
+
+          <button
+            class="image-button"
+            type="button"
+            aria-label="Preview All Services Leave Behind"
+            onclick="openImageModal(
+              'images/NWST-allserviceslb-720-new.png',
+              'All Services Leave Behind'
+            )"
+          >
+            <img
+              src="images/NWST-allserviceslb-720-new.png"
+              alt="Preview of the All Services Leave Behind"
+              loading="lazy"
+            >
+          </button>
+
+          <div class="card-content">
+            <span class="badge">Leave Behind</span>
+
+            <h3 class="product-title">
+              All Services Leave Behind
+            </h3>
+
+            <p class="product-description">
+              An overview of available residential pest-control services.
+            </p>
+          </div>
+
+        </article>
+
+        <article
+          class="social-card searchable-card"
+          data-search="mosquito leave behind print mosquito control"
+        >
+
+          <button
+            class="image-button"
+            type="button"
+            aria-label="Preview Mosquito Leave Behind"
+            onclick="openImageModal(
+              'images/nwst-mosquito-lb-720.png',
+              'Mosquito Leave Behind'
+            )"
+          >
+            <img
+              src="images/nwst-mosquito-lb-720.png"
+              alt="Preview of the Mosquito Leave Behind"
+              loading="lazy"
+            >
+          </button>
+
+          <div class="card-content">
+            <span class="badge">Leave Behind</span>
+
+            <h3 class="product-title">
+              Mosquito Leave Behind
+            </h3>
+
+            <p class="product-description">
+              Customer-facing information about mosquito-control services.
+            </p>
+          </div>
+
+        </article>
+
+      </div>
+
+      <p
+        id="no-results-message"
+        class="no-results-message"
+        hidden
+      >
+        No marketing materials matched your search.
+      </p>
+
+    </section>
+
+    <section
+      id="events"
+      class="events-section"
+      aria-labelledby="events-heading"
+    >
+
+      <div class="section-heading">
+        <span class="section-label">Local Activation</span>
+        <h2 id="events-heading">Event Materials</h2>
+
+        <p>
+          Event-specific marketing materials can be added to this section.
+        </p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      Northwest Family of Brands Marketing Material Portal
+    </p>
+
+    <a href="#request-materials">
+      Submit a Marketing Request
+    </a>
+  </footer>
+
+  <div
+    id="image-modal"
+    class="image-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title"
+    hidden
+  >
+
+    <div class="modal-backdrop" onclick="closeImageModal()"></div>
+
+    <div class="modal-content">
+
+      <button
+        class="modal-close"
+        type="button"
+        aria-label="Close image preview"
+        onclick="closeImageModal()"
+      >
+        &times;
+      </button>
+
+      <h2 id="modal-title" class="modal-title"></h2>
+
+      <img
+        id="modal-image"
+        src=""
+        alt=""
+      >
+
+    </div>
+
+  </div>
+
+  <script>
+    const searchInput = document.getElementById("portal-search");
+    const searchableCards = document.querySelectorAll(".searchable-card");
+    const noResultsMessage = document.getElementById(
+      "no-results-message"
+    );
+
+    searchInput.addEventListener("input", function () {
+      const searchTerm = this.value.toLowerCase().trim();
+      let visibleCards = 0;
+
+      searchableCards.forEach(function (card) {
+        const searchableText = (
+          card.dataset.search + " " + card.textContent
+        ).toLowerCase();
+
+        const matchesSearch = searchableText.includes(searchTerm);
+
+        card.hidden = !matchesSearch;
+
+        if (matchesSearch) {
+          visibleCards++;
+        }
+      });
+
+      noResultsMessage.hidden = visibleCards !== 0;
+    });
+
+    function openImageModal(imageSource, imageTitle) {
+      const modal = document.getElementById("image-modal");
+      const modalImage = document.getElementById("modal-image");
+      const modalTitle = document.getElementById("modal-title");
+
+      modalImage.src = imageSource;
+      modalImage.alt = imageTitle;
+      modalTitle.textContent = imageTitle;
+
+      modal.hidden = false;
+      document.body.classList.add("modal-open");
+    }
+
+    function closeImageModal() {
+      const modal = document.getElementById("image-modal");
+      const modalImage = document.getElementById("modal-image");
+
+      modal.hidden = true;
+      modalImage.src = "";
+
+      document.body.classList.remove("modal-open");
+    }
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        closeImageModal();
+      }
+    });
+  </script>
+
+</body>
+</html>
