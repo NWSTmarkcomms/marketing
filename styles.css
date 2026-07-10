@@ -449,3 +449,34 @@ input {
     max-width: 90%;
     margin: 0 auto;
 }
+
+.catalog-notice {
+    margin: 24px 0;
+    padding: 20px 22px;
+    background: #f3f9ed;
+    border-left: 5px solid #85c446;
+    border-radius: 12px;
+}
+
+.catalog-notice h3 {
+    margin: 0 0 10px;
+    color: #262626;
+    font-size: 1.15rem;
+}
+
+.catalog-notice p {
+    margin: 6px 0;
+    color: #4b5563;
+    line-height: 1.6;
+}
+
+.catalog-notice a {
+    color: #5f9228;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.catalog-notice a:hover,
+.catalog-notice a:focus-visible {
+    color: #48751d;
+}
